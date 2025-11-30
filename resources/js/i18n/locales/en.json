@@ -1,0 +1,97 @@
+{
+    "app": {
+        "title": "Goldcom",
+        "subtitle": "Goldcom Platform",
+        "tagline": "Start your gold savings journey today"
+    },
+    "nav": {
+        "home": "Home",
+        "simulator": "Profit Simulator",
+        "language": "العربية"
+    },
+    "counter": {
+        "title": "Registered so far",
+        "people": "people"
+    },
+    "interest": {
+        "title": "Register Your Interest Now",
+        "subtitle": "Be among the first to benefit from Goldcom platform",
+        "description": "Join thousands who chose to save with gold",
+        "form": {
+            "name": "Full Name",
+            "namePlaceholder": "Enter your full name",
+            "phone": "Phone Number",
+            "phonePlaceholder": "e.g: +96899999999",
+            "email": "Email Address",
+            "emailPlaceholder": "example@email.com",
+            "governorate": "Governorate",
+            "governoratePlaceholder": "Select governorate",
+            "wilaya": "Wilaya",
+            "wilayaPlaceholder": "Select wilaya",
+            "monthlyAmount": "Monthly Savings Amount",
+            "monthlyAmountPlaceholder": "Enter amount",
+            "customAmount": "Custom amount",
+            "referralCode": "Referral Code (Optional)",
+            "referralCodePlaceholder": "Enter referral code if any",
+            "submit": "Register Interest",
+            "submitting": "Registering..."
+        },
+        "amounts": {
+            "10": "10 OMR",
+            "25": "25 OMR",
+            "50": "50 OMR",
+            "100": "100 OMR",
+            "custom": "Custom"
+        },
+        "success": {
+            "title": "Successfully Registered! 🎉",
+            "message": "Thank you for your interest! We will contact you soon with Goldcom platform updates.",
+            "button": "Register Another"
+        }
+    },
+    "simulator": {
+        "title": "Gold Profit Simulator",
+        "subtitle": "Discover how much you can earn from gold savings",
+        "description": "Enter monthly amount to see expected returns",
+        "form": {
+            "monthlyAmount": "Monthly Amount (OMR)",
+            "monthlyAmountPlaceholder": "Enter amount",
+            "months": "Number of Months",
+            "calculate": "Calculate Returns",
+            "calculating": "Calculating..."
+        },
+        "results": {
+            "title": "Simulation Results",
+            "totalInvestment": "Total Investment",
+            "goldGrams": "Gold Amount (grams)",
+            "currentValue": "Current Value",
+            "profit": "Expected Profit",
+            "profitPercentage": "Profit Percentage",
+            "motivational": "🌟 Invest in gold today and reap your profits tomorrow!",
+            "disclaimer": "* Figures are approximate and depend on actual market prices"
+        }
+    },
+    "governorates": {
+        "muscat": "Muscat",
+        "dhofar": "Dhofar",
+        "musandam": "Musandam",
+        "buraimi": "Al Buraimi",
+        "dakhliyah": "Ad Dakhliyah",
+        "sharqiyah_north": "North Ash Sharqiyah",
+        "sharqiyah_south": "South Ash Sharqiyah",
+        "batinah_north": "North Al Batinah",
+        "batinah_south": "South Al Batinah",
+        "dhahirah": "Ad Dhahirah",
+        "wusta": "Al Wusta"
+    },
+    "footer": {
+        "rights": "All rights reserved",
+        "goldcom": "Goldcom"
+    },
+    "validation": {
+        "required": "This field is required",
+        "email": "Please enter a valid email",
+        "phone": "Please enter a valid phone number"
+    }
+}
+

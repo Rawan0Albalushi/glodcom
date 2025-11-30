@@ -1,0 +1,97 @@
+{
+    "app": {
+        "title": "جولدكم",
+        "subtitle": "منصة جولدكم",
+        "tagline": "ابدأ رحلة الادخار بالذهب اليوم"
+    },
+    "nav": {
+        "home": "الرئيسية",
+        "simulator": "محاكي الأرباح",
+        "language": "English"
+    },
+    "counter": {
+        "title": "مسجّل حتى الآن",
+        "people": "شخص"
+    },
+    "interest": {
+        "title": "سجّل اهتمامك الآن",
+        "subtitle": "كن من أوائل المستفيدين من منصة جولدكم ",
+        "description": "انضم إلى آلاف الأشخاص الذين اختاروا جولدكم ",
+        "form": {
+            "name": "الاسم الكامل",
+            "namePlaceholder": "أدخل اسمك الكامل",
+            "phone": "رقم الهاتف",
+            "phonePlaceholder": "مثال: 96899999999+",
+            "email": "البريد الإلكتروني",
+            "emailPlaceholder": "example@email.com",
+            "governorate": "المحافظة",
+            "governoratePlaceholder": "اختر المحافظة",
+            "wilaya": "الولاية",
+            "wilayaPlaceholder": "اختر الولاية",
+            "monthlyAmount": "مبلغ الادخار الشهري",
+            "monthlyAmountPlaceholder": "أدخل المبلغ",
+            "customAmount": "قيمة مخصصة",
+            "referralCode": "رمز الدعوة (اختياري)",
+            "referralCodePlaceholder": "أدخل رمز الدعوة إن وجد",
+            "submit": "سجّل اهتمامك",
+            "submitting": "جاري التسجيل..."
+        },
+        "amounts": {
+            "10": "10 ر.ع",
+            "25": "25 ر.ع",
+            "50": "50 ر.ع",
+            "100": "100 ر.ع",
+            "custom": "مخصص"
+        },
+        "success": {
+            "title": "تم التسجيل بنجاح! 🎉",
+            "message": "شكراً لاهتمامك! سنتواصل معك قريباً بأخبار منصة جولدكم.",
+            "button": "سجّل شخص آخر"
+        }
+    },
+    "simulator": {
+        "title": "محاكي أرباح الذهب",
+        "subtitle": "اكتشف كم يمكنك أن تربح من ادخار الذهب",
+        "description": "أدخل المبلغ الشهري لترى العائد المتوقع",
+        "form": {
+            "monthlyAmount": "المبلغ الشهري (ر.ع)",
+            "monthlyAmountPlaceholder": "أدخل المبلغ",
+            "months": "عدد الأشهر",
+            "calculate": "احسب العائد",
+            "calculating": "جاري الحساب..."
+        },
+        "results": {
+            "title": "نتائج المحاكاة",
+            "totalInvestment": "إجمالي الاستثمار",
+            "goldGrams": "كمية الذهب (جرام)",
+            "currentValue": "القيمة الحالية",
+            "profit": "الربح المتوقع",
+            "profitPercentage": "نسبة الربح",
+            "motivational": "🌟 استثمر في الذهب اليوم واحصد أرباحك غداً!",
+            "disclaimer": "* الأرقام تقريبية وتعتمد على أسعار السوق الفعلية"
+        }
+    },
+    "governorates": {
+        "muscat": "مسقط",
+        "dhofar": "ظفار",
+        "musandam": "مسندم",
+        "buraimi": "البريمي",
+        "dakhliyah": "الداخلية",
+        "sharqiyah_north": "شمال الشرقية",
+        "sharqiyah_south": "جنوب الشرقية",
+        "batinah_north": "شمال الباطنة",
+        "batinah_south": "جنوب الباطنة",
+        "dhahirah": "الظاهرة",
+        "wusta": "الوسطى"
+    },
+    "footer": {
+        "rights": "جميع الحقوق محفوظة",
+        "goldcom": "جولدكم"
+    },
+    "validation": {
+        "required": "هذا الحقل مطلوب",
+        "email": "يرجى إدخال بريد إلكتروني صحيح",
+        "phone": "يرجى إدخال رقم هاتف صحيح"
+    }
+}
+
