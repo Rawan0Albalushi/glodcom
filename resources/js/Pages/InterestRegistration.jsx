@@ -296,7 +296,7 @@ export default function InterestRegistration() {
                                             <option value="" className="bg-gold-900">{t('interest.form.wilayaPlaceholder')}</option>
                                             {selectedGovernorate?.wilayas.map(wilaya => (
                                                 <option key={wilaya} value={wilaya} className="bg-gold-900">
-                                                    {wilaya.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                                                    {t(`wilayas.${wilaya}`)}
                                                 </option>
                                             ))}
                                         </select>

@@ -160,6 +160,31 @@ export default function GoldSimulator() {
                                         {t('simulator.results.title')}
                                     </h2>
 
+                                    {/* Gold Prices Info */}
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.05 }}
+                                        className="flex justify-center gap-6 mb-6"
+                                    >
+                                        <div className="bg-gold-900/50 rounded-xl px-5 py-3 border border-gold-600/30 text-center">
+                                            <p className="text-gold-400 text-xs mb-1">
+                                                {t('simulator.results.minPrice')}
+                                            </p>
+                                            <p className="text-lg font-bold text-gold-200">
+                                                {result.min_price} {isRTL ? 'ر.ع' : 'OMR'}
+                                            </p>
+                                        </div>
+                                        <div className="bg-gold-900/50 rounded-xl px-5 py-3 border border-gold-600/30 text-center">
+                                            <p className="text-gold-400 text-xs mb-1">
+                                                {t('simulator.results.maxPrice')}
+                                            </p>
+                                            <p className="text-lg font-bold text-gold-200">
+                                                {result.max_price} {isRTL ? 'ر.ع' : 'OMR'}
+                                            </p>
+                                        </div>
+                                    </motion.div>
+
                                     <div className="grid md:grid-cols-2 gap-6">
                                         {/* Total Investment */}
                                         <motion.div
@@ -248,47 +273,6 @@ export default function GoldSimulator() {
                                     {t('simulator.results.disclaimer')}
                                 </motion.p>
 
-                                {/* Visual Comparison Chart */}
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: 0.7 }}
-                                    className="bg-gradient-to-br from-gold-800/40 to-gold-900/40 backdrop-blur-md rounded-3xl p-6 md:p-8 border border-gold-600/30"
-                                >
-                                    <div className="flex items-end justify-center gap-8 h-48">
-                                        {/* Investment Bar */}
-                                        <div className="flex flex-col items-center">
-                                            <motion.div
-                                                initial={{ height: 0 }}
-                                                animate={{ height: '60%' }}
-                                                transition={{ delay: 0.8, duration: 0.5 }}
-                                                className="w-20 bg-gradient-to-t from-gold-700 to-gold-500 rounded-t-lg relative"
-                                                style={{ height: '60%' }}
-                                            >
-                                                <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-gold-300 text-sm font-semibold whitespace-nowrap">
-                                                    {formatCurrency(result.total_investment)}
-                                                </div>
-                                            </motion.div>
-                                            <p className="mt-2 text-gold-400 text-sm">{isRTL ? 'الاستثمار' : 'Investment'}</p>
-                                        </div>
-
-                                        {/* Return Bar */}
-                                        <div className="flex flex-col items-center">
-                                            <motion.div
-                                                initial={{ height: 0 }}
-                                                animate={{ height: '100%' }}
-                                                transition={{ delay: 1, duration: 0.5 }}
-                                                className="w-20 bg-gradient-to-t from-green-700 to-green-400 rounded-t-lg relative"
-                                                style={{ height: '100%' }}
-                                            >
-                                                <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-green-300 text-sm font-semibold whitespace-nowrap">
-                                                    {formatCurrency(result.current_value)}
-                                                </div>
-                                            </motion.div>
-                                            <p className="mt-2 text-green-400 text-sm">{isRTL ? 'العائد' : 'Returns'}</p>
-                                        </div>
-                                    </div>
-                                </motion.div>
                             </motion.div>
                         )}
                     </AnimatePresence>

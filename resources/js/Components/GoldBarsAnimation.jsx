@@ -6,7 +6,7 @@ export default function GoldBarsAnimation() {
         return Array.from({ length: 15 }, (_, i) => ({
             id: i,
             left: Math.random() * 100,
-            delay: Math.random() * 15,
+            delay: Math.random() * 2,
             duration: 15 + Math.random() * 10,
             size: 20 + Math.random() * 30,
             rotation: Math.random() * 360,
