@@ -151,6 +151,60 @@
         "required": "This field is required",
         "email": "Please enter a valid email",
         "phone": "Please enter a valid phone number"
+    },
+    "admin": {
+        "login": {
+            "title": "Admin Login",
+            "subtitle": "Enter your credentials to access the dashboard",
+            "username": "Username",
+            "usernamePlaceholder": "Enter username",
+            "password": "Password",
+            "passwordPlaceholder": "Enter password",
+            "submit": "Login",
+            "submitting": "Logging in...",
+            "invalidCredentials": "Invalid username or password. Please try again.",
+            "backToHome": "← Back to Home"
+        },
+        "nav": {
+            "dashboard": "Dashboard",
+            "draw": "Lucky Draw",
+            "logout": "Logout"
+        },
+        "dashboard": {
+            "title": "Admin Dashboard",
+            "searchPlaceholder": "Search by name, email, or phone...",
+            "filterGovernorate": "Filter by Governorate",
+            "allGovernorates": "All Governorates",
+            "export": "Export CSV",
+            "refresh": "Refresh",
+            "showing": "Showing",
+            "results": "results",
+            "noResults": "No registrations found"
+        },
+        "stats": {
+            "totalRegistered": "Total Registered",
+            "totalAmount": "Monthly Savings Total",
+            "governorates": "Active Governorates"
+        },
+        "table": {
+            "name": "Name",
+            "contact": "Contact",
+            "location": "Location",
+            "amount": "Monthly Amount",
+            "date": "Registered"
+        },
+        "draw": {
+            "title": "Lucky Draw",
+            "subtitle": "Random Winner Selection",
+            "description": "Select random winners from registered participants",
+            "winnersCount": "Number of Winners",
+            "filterGovernorate": "Filter by Governorate",
+            "availableParticipants": "Available Participants",
+            "startDraw": "Start Draw",
+            "drawing": "Drawing...",
+            "winners": "Winners",
+            "winnersSelected": "winner(s) selected"
+        }
     }
 }
 

@@ -151,6 +151,60 @@
         "required": "هذا الحقل مطلوب",
         "email": "يرجى إدخال بريد إلكتروني صحيح",
         "phone": "يرجى إدخال رقم هاتف صحيح"
+    },
+    "admin": {
+        "login": {
+            "title": "دخول المدير",
+            "subtitle": "أدخل بيانات الدخول للوصول إلى لوحة التحكم",
+            "username": "اسم المستخدم",
+            "usernamePlaceholder": "أدخل اسم المستخدم",
+            "password": "كلمة المرور",
+            "passwordPlaceholder": "أدخل كلمة المرور",
+            "submit": "تسجيل الدخول",
+            "submitting": "جاري الدخول...",
+            "invalidCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة. حاول مرة أخرى.",
+            "backToHome": "→ العودة للرئيسية"
+        },
+        "nav": {
+            "dashboard": "لوحة التحكم",
+            "draw": "السحب العشوائي",
+            "logout": "تسجيل الخروج"
+        },
+        "dashboard": {
+            "title": "لوحة تحكم المدير",
+            "searchPlaceholder": "البحث بالاسم أو البريد أو الهاتف...",
+            "filterGovernorate": "تصفية حسب المحافظة",
+            "allGovernorates": "جميع المحافظات",
+            "export": "تصدير CSV",
+            "refresh": "تحديث",
+            "showing": "عرض",
+            "results": "نتيجة",
+            "noResults": "لا توجد تسجيلات"
+        },
+        "stats": {
+            "totalRegistered": "إجمالي المسجلين",
+            "totalAmount": "إجمالي الادخار الشهري",
+            "governorates": "المحافظات النشطة"
+        },
+        "table": {
+            "name": "الاسم",
+            "contact": "التواصل",
+            "location": "الموقع",
+            "amount": "المبلغ الشهري",
+            "date": "تاريخ التسجيل"
+        },
+        "draw": {
+            "title": "السحب العشوائي",
+            "subtitle": "اختيار الفائزين عشوائياً",
+            "description": "اختر فائزين عشوائيين من بين المسجلين",
+            "winnersCount": "عدد الفائزين",
+            "filterGovernorate": "تصفية حسب المحافظة",
+            "availableParticipants": "المشاركون المتاحون",
+            "startDraw": "بدء السحب",
+            "drawing": "جاري السحب...",
+            "winners": "الفائزون",
+            "winnersSelected": "فائز تم اختياره"
+        }
     }
 }
 

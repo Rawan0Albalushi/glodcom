@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -23,3 +24,21 @@ Route::get('/lang/{locale}', function (string $locale) {
     }
     return back();
 })->name('lang.switch');
+
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AdminController::class, 'login'])->name('login.submit');
+    Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+    
+    Route::middleware('admin')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::get('/draw', [AdminController::class, 'draw'])->name('draw');
+        Route::post('/draw', [AdminController::class, 'performDraw'])->name('draw.perform');
+    });
+});
