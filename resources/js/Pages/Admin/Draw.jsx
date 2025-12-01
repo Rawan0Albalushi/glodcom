@@ -103,13 +103,13 @@ export default function AdminDraw({ interests = [] }) {
             {/* Confetti Effect */}
             <AnimatePresence>
                 {showConfetti && (
-                    <div className="fixed inset-0 z-50 pointer-events-none overflow-hidden">
+                    <div className="fixed inset-0 z-50 pointer-events-none overflow-hidden" dir="ltr">
                         {[...Array(50)].map((_, i) => (
                             <motion.div
                                 key={i}
+                                style={{ left: `${Math.random() * 100}%` }}
                                 initial={{ 
                                     y: -20,
-                                    x: Math.random() * window.innerWidth,
                                     rotate: 0,
                                     opacity: 1
                                 }}

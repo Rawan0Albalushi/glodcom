@@ -175,11 +175,14 @@
             "searchPlaceholder": "Search by name, email, or phone...",
             "filterGovernorate": "Filter by Governorate",
             "allGovernorates": "All Governorates",
-            "export": "Export CSV",
+            "export": "Export Excel",
             "refresh": "Refresh",
             "showing": "Showing",
             "results": "results",
             "noResults": "No registrations found"
+        },
+        "export": {
+            "referralCode": "Referral Code"
         },
         "stats": {
             "totalRegistered": "Total Registered",

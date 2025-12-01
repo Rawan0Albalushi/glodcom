@@ -175,11 +175,14 @@
             "searchPlaceholder": "البحث بالاسم أو البريد أو الهاتف...",
             "filterGovernorate": "تصفية حسب المحافظة",
             "allGovernorates": "جميع المحافظات",
-            "export": "تصدير CSV",
+            "export": "تصدير Excel",
             "refresh": "تحديث",
             "showing": "عرض",
             "results": "نتيجة",
             "noResults": "لا توجد تسجيلات"
+        },
+        "export": {
+            "referralCode": "رمز الدعوة"
         },
         "stats": {
             "totalRegistered": "إجمالي المسجلين",

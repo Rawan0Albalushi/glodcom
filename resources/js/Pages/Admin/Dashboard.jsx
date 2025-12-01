@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { usePage, router, Link } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
+import * as XLSX from 'xlsx';
 import { 
     Users, LogOut, Gift, Search, Download, ChevronLeft, ChevronRight,
     Globe, MapPin, Phone, Mail, Coins, Calendar, RefreshCw, Filter
@@ -78,25 +79,48 @@ export default function AdminDashboard({ interests = [] }) {
         return acc;
     }, {});
 
-    const exportCSV = () => {
-        const headers = ['Name', 'Email', 'Phone', 'Governorate', 'Wilaya', 'Monthly Amount', 'Referral Code', 'Registered At'];
+    const exportExcel = () => {
+        const headers = [
+            t('admin.table.name'),
+            t('admin.table.contact') + ' (Email)',
+            t('admin.table.contact') + ' (Phone)',
+            t('admin.table.location') + ' (Governorate)',
+            t('admin.table.location') + ' (Wilaya)',
+            t('admin.table.amount'),
+            t('admin.export.referralCode'),
+            t('admin.table.date')
+        ];
+        
         const rows = filteredInterests.map(i => [
             i.name,
             i.email,
             i.phone,
-            i.governorate,
-            i.wilaya,
+            t(`governorates.${i.governorate}`),
+            t(`wilayas.${i.wilaya}`),
             i.monthly_amount,
             i.referral_code || '',
-            new Date(i.created_at).toLocaleDateString()
+            new Date(i.created_at).toLocaleDateString(locale === 'ar' ? 'ar-OM' : 'en-US')
         ]);
         
-        const csvContent = [headers, ...rows].map(row => row.join(',')).join('\n');
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = `goldcom-registrations-${new Date().toISOString().split('T')[0]}.csv`;
-        link.click();
+        const wsData = [headers, ...rows];
+        const ws = XLSX.utils.aoa_to_sheet(wsData);
+        
+        // Set column widths
+        ws['!cols'] = [
+            { wch: 25 }, // Name
+            { wch: 30 }, // Email
+            { wch: 15 }, // Phone
+            { wch: 20 }, // Governorate
+            { wch: 20 }, // Wilaya
+            { wch: 15 }, // Amount
+            { wch: 15 }, // Referral Code
+            { wch: 15 }, // Date
+        ];
+        
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Registrations');
+        
+        XLSX.writeFile(wb, `goldcom-registrations-${new Date().toISOString().split('T')[0]}.xlsx`);
     };
 
     return (
@@ -249,7 +273,7 @@ export default function AdminDashboard({ interests = [] }) {
                                 </SelectContent>
                             </Select>
 
-                            <Button onClick={exportCSV} variant="outline" className="gap-2">
+                            <Button onClick={exportExcel} variant="outline" className="gap-2">
                                 <Download className="w-4 h-4" />
                                 {t('admin.dashboard.export')}
                             </Button>
