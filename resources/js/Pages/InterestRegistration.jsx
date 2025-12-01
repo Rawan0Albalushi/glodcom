@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import { User, Phone, Mail, MapPin, Building, Coins, Tag, Loader2, Trophy, Sparkles, UserPlus } from 'lucide-react';
 import MainLayout from '../Layouts/MainLayout';
-import LiveCounter from '../Components/LiveCounter';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -89,9 +88,7 @@ export default function InterestRegistration() {
         
         if (!formData.name.trim()) newErrors.name = t('validation.required');
         if (!formData.phone.trim()) newErrors.phone = t('validation.required');
-        if (!formData.email.trim()) {
-            newErrors.email = t('validation.required');
-        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+        if (formData.email.trim() && !/\S+@\S+\.\S+/.test(formData.email)) {
             newErrors.email = t('validation.email');
         }
         if (!formData.governorate) newErrors.governorate = t('validation.required');
@@ -169,16 +166,6 @@ export default function InterestRegistration() {
                         <p className="text-gold-500 max-w-md mx-auto">
                             {t('interest.description')}
                         </p>
-                    </motion.div>
-
-                    {/* Live Counter */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        className="mb-10"
-                    >
-                        <LiveCounter />
                     </motion.div>
 
                     {/* Form or Success Message */}
@@ -282,7 +269,7 @@ export default function InterestRegistration() {
                                                 {/* Email */}
                                                 <div className="md:col-span-2 space-y-3">
                                                     <Label htmlFor="email">
-                                                        {t('interest.form.email')} <span className="text-red-400">*</span>
+                                                        {t('interest.form.email')} <span className="text-gold-500 text-sm">({t('validation.optional')})</span>
                                                     </Label>
                                                     <div className="relative">
                                                         <Mail className="absolute start-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gold-500" />

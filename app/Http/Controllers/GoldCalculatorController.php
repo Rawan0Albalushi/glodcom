@@ -21,8 +21,8 @@ class GoldCalculatorController extends Controller
         $months = $validated['months'] ?? 12;
         
         // Fixed prices (can be made configurable later)
-        $minPrice = 40; // OMR per gram
-        $maxPrice = 50; // OMR per gram
+        $minPrice = 35.51; // OMR per gram
+        $maxPrice = 48.92; // OMR per gram
         
         // Total investment
         $totalInvestment = $monthlyAmount * $months;

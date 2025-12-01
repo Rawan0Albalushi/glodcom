@@ -18,7 +18,7 @@ class InterestController extends Controller
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'phone' => 'required|string|max:20',
-                'email' => 'required|email|max:255',
+                'email' => 'nullable|email|max:255',
                 'governorate' => 'required|string|max:100',
                 'wilaya' => 'required|string|max:100',
                 'monthly_amount' => 'required|numeric|min:1',

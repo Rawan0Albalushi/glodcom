@@ -53,9 +53,9 @@
     "simulator": {
         "title": "Gold Profit Simulator",
         "subtitle": "Discover how much you can earn from gold savings",
-        "description": "Enter monthly amount to see expected returns",
+        "description": "Enter amount to see expected returns",
         "form": {
-            "monthlyAmount": "Monthly Amount (OMR)",
+            "monthlyAmount": "Amount (OMR)",
             "monthlyAmountPlaceholder": "Enter amount",
             "months": "Number of Months",
             "monthsUnit": "months",
@@ -150,7 +150,8 @@
     "validation": {
         "required": "This field is required",
         "email": "Please enter a valid email",
-        "phone": "Please enter a valid phone number"
+        "phone": "Please enter a valid phone number",
+        "optional": "optional"
     },
     "admin": {
         "login": {

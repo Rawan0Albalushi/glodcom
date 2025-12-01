@@ -53,9 +53,9 @@
     "simulator": {
         "title": "محاكي أرباح الذهب",
         "subtitle": "اكتشف كم يمكنك أن تربح من ادخار الذهب",
-        "description": "أدخل المبلغ الشهري لترى العائد المتوقع",
+        "description": "أدخل المبلغ لترى العائد المتوقع",
         "form": {
-            "monthlyAmount": "المبلغ الشهري (ر.ع)",
+            "monthlyAmount": "المبلغ (ر.ع)",
             "monthlyAmountPlaceholder": "أدخل المبلغ",
             "months": "عدد الأشهر",
             "monthsUnit": "شهر",
@@ -150,7 +150,8 @@
     "validation": {
         "required": "هذا الحقل مطلوب",
         "email": "يرجى إدخال بريد إلكتروني صحيح",
-        "phone": "يرجى إدخال رقم هاتف صحيح"
+        "phone": "يرجى إدخال رقم هاتف صحيح",
+        "optional": "اختياري"
     },
     "admin": {
         "login": {

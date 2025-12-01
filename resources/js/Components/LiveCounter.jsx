@@ -55,7 +55,7 @@ export default function LiveCounter() {
                             className={`flex items-center justify-center gap-3 ${isAnimating ? 'animate-pulse' : ''}`}
                         >
                             <span className="text-5xl md:text-6xl lg:text-7xl font-bold gold-shimmer tabular-nums">
-                                {count.toLocaleString()}
+                                {count.toLocaleString('en')}
                             </span>
                             <span className="text-gold-400 text-lg md:text-xl">
                                 {t('counter.people')}

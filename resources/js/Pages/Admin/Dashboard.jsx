@@ -99,7 +99,7 @@ export default function AdminDashboard({ interests = [] }) {
             t(`wilayas.${i.wilaya}`),
             i.monthly_amount,
             i.referral_code || '',
-            new Date(i.created_at).toLocaleDateString(locale === 'ar' ? 'ar-OM' : 'en-US')
+            new Date(i.created_at).toLocaleDateString('en-US')
         ]);
         
         const wsData = [headers, ...rows];
@@ -353,7 +353,7 @@ export default function AdminDashboard({ interests = [] }) {
                                             <td className="p-4 hidden sm:table-cell">
                                                 <span className="text-gold-500 text-sm flex items-center gap-1">
                                                     <Calendar className="w-3 h-3" />
-                                                    {new Date(interest.created_at).toLocaleDateString(locale === 'ar' ? 'ar-OM' : 'en-US')}
+                                                    {new Date(interest.created_at).toLocaleDateString('en-US')}
                                                 </span>
                                             </td>
                                         </motion.tr>

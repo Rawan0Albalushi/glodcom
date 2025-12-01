@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 
@@ -17,7 +16,6 @@ export default function GoldSimulator() {
     const isRTL = i18n.language === 'ar';
 
     const [monthlyAmount, setMonthlyAmount] = useState('');
-    const [months, setMonths] = useState('12');
     const [isCalculating, setIsCalculating] = useState(false);
     const [result, setResult] = useState(null);
     const [error, setError] = useState('');
@@ -36,7 +34,7 @@ export default function GoldSimulator() {
         try {
             const response = await axios.post('/api/gold/calculate', {
                 monthly_amount: parseFloat(monthlyAmount),
-                months: parseInt(months),
+                months: 1,
             });
 
             if (response.data.success) {
@@ -50,14 +48,12 @@ export default function GoldSimulator() {
     };
 
     const formatCurrency = (value) => {
-        return new Intl.NumberFormat(isRTL ? 'ar-OM' : 'en-OM', {
+        return new Intl.NumberFormat('en-OM', {
             style: 'currency',
             currency: 'OMR',
             minimumFractionDigits: 2,
         }).format(value);
     };
-
-    const monthOptions = [3, 6, 12, 24, 36, 48, 60];
 
     return (
         <MainLayout>
@@ -99,54 +95,33 @@ export default function GoldSimulator() {
                         <Card className="p-2 md:p-4 mb-8">
                             <CardContent className="pt-6">
                                 <form onSubmit={handleCalculate} className="space-y-6">
-                                    <div className="grid md:grid-cols-2 gap-6">
-                                        {/* Monthly Amount */}
-                                        <div className="space-y-2">
-                                            <Label htmlFor="monthlyAmount" className="text-base">
-                                                {t('simulator.form.monthlyAmount')}
-                                            </Label>
-                                            <div className="relative">
-                                                <Coins className="absolute start-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gold-500" />
-                                                <Input
-                                                    id="monthlyAmount"
-                                                    type="number"
-                                                    value={monthlyAmount}
-                                                    onChange={(e) => {
-                                                        setMonthlyAmount(e.target.value);
-                                                        setError('');
-                                                    }}
-                                                    placeholder={t('simulator.form.monthlyAmountPlaceholder')}
-                                                    className={cn(
-                                                        "ps-11 text-lg",
-                                                        error && "border-red-500 focus:ring-red-500/50"
-                                                    )}
-                                                    min="1"
-                                                    step="0.01"
-                                                />
-                                            </div>
-                                            {error && (
-                                                <p className="text-red-400 text-sm">{error}</p>
-                                            )}
+                                    {/* Monthly Amount */}
+                                    <div className="space-y-2">
+                                        <Label htmlFor="monthlyAmount" className="text-base">
+                                            {t('simulator.form.monthlyAmount')}
+                                        </Label>
+                                        <div className="relative">
+                                            <Coins className="absolute start-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gold-500" />
+                                            <Input
+                                                id="monthlyAmount"
+                                                type="number"
+                                                value={monthlyAmount}
+                                                onChange={(e) => {
+                                                    setMonthlyAmount(e.target.value);
+                                                    setError('');
+                                                }}
+                                                placeholder={t('simulator.form.monthlyAmountPlaceholder')}
+                                                className={cn(
+                                                    "ps-11 text-lg",
+                                                    error && "border-red-500 focus:ring-red-500/50"
+                                                )}
+                                                min="1"
+                                                step="0.01"
+                                            />
                                         </div>
-
-                                        {/* Months */}
-                                        <div className="space-y-2">
-                                            <Label htmlFor="months" className="text-base">
-                                                {t('simulator.form.months')}
-                                            </Label>
-                                            <Select value={months} onValueChange={setMonths}>
-                                                <SelectTrigger className="text-lg">
-                                                    <SelectValue placeholder={t('simulator.form.months')} />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    {monthOptions.map(m => (
-                                                        <SelectItem key={m} value={String(m)}>
-                                                            {m} {t('simulator.form.monthsUnit')}
-                                                        </SelectItem>
-                                                    ))}
-                                                </SelectContent>
-                                            </Select>
-                                        </div>
+                                        {error && (
+                                            <p className="text-red-400 text-sm">{error}</p>
+                                        )}
                                     </div>
 
                                     {/* Calculate Button */}
@@ -246,7 +221,7 @@ export default function GoldSimulator() {
                                                     </p>
                                                 </div>
                                                 <p className="text-2xl font-bold text-gold-100">
-                                                    {result.gold_grams.toLocaleString()} g
+                                                    {result.gold_grams.toLocaleString('en')} g
                                                 </p>
                                             </motion.div>
 
