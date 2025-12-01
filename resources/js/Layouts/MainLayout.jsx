@@ -1,12 +1,17 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Home, Calculator, Globe } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import GoldBarsAnimation from '../Components/GoldBarsAnimation';
 
 export default function MainLayout({ children }) {
     const { t, i18n } = useTranslation();
     const { locale } = usePage().props;
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         if (locale && i18n.language !== locale) {
@@ -16,17 +21,23 @@ export default function MainLayout({ children }) {
         document.documentElement.lang = locale;
     }, [locale, i18n]);
 
-    // Close mobile menu when clicking outside
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     useEffect(() => {
         if (mobileMenuOpen) {
-            const handleClickOutside = (e) => {
-                if (!e.target.closest('nav')) {
-                    setMobileMenuOpen(false);
-                }
-            };
-            document.addEventListener('click', handleClickOutside);
-            return () => document.removeEventListener('click', handleClickOutside);
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
         }
+        return () => {
+            document.body.style.overflow = '';
+        };
     }, [mobileMenuOpen]);
 
     const toggleLanguage = () => {
@@ -36,12 +47,22 @@ export default function MainLayout({ children }) {
 
     const closeMobileMenu = () => setMobileMenuOpen(false);
 
+    const navLinks = [
+        { href: '/', label: t('nav.home'), icon: Home },
+        { href: '/simulator', label: t('nav.simulator'), icon: Calculator },
+    ];
+
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gold-900 via-gold-800 to-gold-900 relative overflow-hidden">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-5">
-                <div className="absolute inset-0" style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D8BC75' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        <div className="min-h-screen bg-gold-950 relative overflow-hidden">
+            {/* Background Effects */}
+            <div className="fixed inset-0 pointer-events-none">
+                {/* Radial gradient overlay */}
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--color-gold-900)_0%,_transparent_50%)] opacity-60" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--color-gold-800)_0%,_transparent_40%)] opacity-30" />
+                
+                {/* Subtle pattern */}
+                <div className="absolute inset-0 opacity-[0.02]" style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C6963F' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
                 }} />
             </div>
 
@@ -49,128 +70,194 @@ export default function MainLayout({ children }) {
             <GoldBarsAnimation />
 
             {/* Navigation */}
-            <nav className="relative z-20 bg-gold-900/80 backdrop-blur-md border-b border-gold-700/50">
+            <nav className={cn(
+                "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+                scrolled ? "bg-gold-950/90 backdrop-blur-xl border-b border-gold-800/50 shadow-lg shadow-gold-950/50" : "bg-transparent"
+            )}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-16">
+                    <div className="flex items-center justify-between h-16 md:h-20">
                         {/* Logo */}
-                        <Link href="/" className="flex items-center gap-3">
-                            <img 
+                        <Link href="/" className="flex items-center gap-3 group">
+                            <motion.img 
                                 src="/images/goldcom-logo1.jpg" 
                                 alt="Goldcom" 
-                                className="h-10 w-auto rounded"
+                                className="h-10 md:h-12 w-auto rounded-xl shadow-lg ring-1 ring-gold-700/50 group-hover:ring-gold-500/70 transition-all duration-300"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
                             />
                         </Link>
 
                         {/* Desktop Nav Links */}
-                        <div className="hidden md:flex items-center gap-6">
-                            <Link 
-                                href="/" 
-                                className="text-gold-200 hover:text-gold-400 transition-colors font-medium"
-                            >
-                                {t('nav.home')}
-                            </Link>
-                            <Link 
-                                href="/simulator" 
-                                className="text-gold-200 hover:text-gold-400 transition-colors font-medium"
-                            >
-                                {t('nav.simulator')}
-                            </Link>
-                            <button 
+                        <div className="hidden md:flex items-center gap-2">
+                            {navLinks.map((link) => (
+                                <Link 
+                                    key={link.href}
+                                    href={link.href}
+                                >
+                                    <Button 
+                                        variant="ghost" 
+                                        className="gap-2 text-gold-300 hover:text-gold-100"
+                                    >
+                                        <link.icon className="w-4 h-4" />
+                                        {link.label}
+                                    </Button>
+                                </Link>
+                            ))}
+                            <div className="w-px h-8 bg-gold-700/50 mx-2" />
+                            <Button 
                                 onClick={toggleLanguage}
-                                className="px-4 py-2 bg-gold-600/20 hover:bg-gold-600/40 text-gold-300 rounded-lg transition-all border border-gold-600/30"
+                                variant="outline"
+                                size="sm"
+                                className="gap-2"
                             >
+                                <Globe className="w-4 h-4" />
                                 {t('nav.language')}
-                            </button>
+                            </Button>
                         </div>
 
                         {/* Mobile Menu Button */}
-                        <button
+                        <Button
+                            variant="ghost"
+                            size="icon"
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-lg bg-gold-600/20 border border-gold-600/30 text-gold-300 hover:bg-gold-600/40 transition-all focus:outline-none focus:ring-2 focus:ring-gold-500/50"
+                            className="md:hidden"
                             aria-label="Toggle menu"
                         >
-                            <div className="w-5 h-4 relative flex flex-col justify-between">
-                                <span 
-                                    className={`w-full h-0.5 bg-gold-300 rounded-full transform transition-all duration-300 origin-center ${
-                                        mobileMenuOpen ? 'rotate-45 translate-y-[7px]' : ''
-                                    }`}
-                                />
-                                <span 
-                                    className={`w-full h-0.5 bg-gold-300 rounded-full transition-all duration-200 ${
-                                        mobileMenuOpen ? 'opacity-0 scale-0' : ''
-                                    }`}
-                                />
-                                <span 
-                                    className={`w-full h-0.5 bg-gold-300 rounded-full transform transition-all duration-300 origin-center ${
-                                        mobileMenuOpen ? '-rotate-45 -translate-y-[7px]' : ''
-                                    }`}
-                                />
-                            </div>
-                        </button>
-                    </div>
-                </div>
-
-                {/* Mobile Menu */}
-                <div 
-                    className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-                        mobileMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
-                >
-                    <div className="bg-gold-900/95 backdrop-blur-lg border-t border-gold-700/30">
-                        <div className="px-4 py-3 space-y-1">
-                            <Link 
-                                href="/"
-                                onClick={closeMobileMenu}
-                                className="flex items-center gap-3 px-4 py-3 rounded-xl text-gold-200 hover:text-gold-400 hover:bg-gold-700/30 transition-all font-medium group"
-                            >
-                                <svg className="w-5 h-5 text-gold-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                </svg>
-                                {t('nav.home')}
-                            </Link>
-                            <Link 
-                                href="/simulator"
-                                onClick={closeMobileMenu}
-                                className="flex items-center gap-3 px-4 py-3 rounded-xl text-gold-200 hover:text-gold-400 hover:bg-gold-700/30 transition-all font-medium group"
-                            >
-                                <svg className="w-5 h-5 text-gold-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                </svg>
-                                {t('nav.simulator')}
-                            </Link>
-                            <div className="pt-2 pb-1">
-                                <button 
-                                    onClick={() => {
-                                        toggleLanguage();
-                                        closeMobileMenu();
-                                    }}
-                                    className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-gold-600/30 to-gold-500/30 hover:from-gold-600/50 hover:to-gold-500/50 text-gold-300 rounded-xl transition-all border border-gold-600/40 font-medium"
-                                >
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-                                    </svg>
-                                    {t('nav.language')}
-                                </button>
-                            </div>
-                        </div>
+                            <AnimatePresence mode="wait">
+                                {mobileMenuOpen ? (
+                                    <motion.div
+                                        key="close"
+                                        initial={{ rotate: -90, opacity: 0 }}
+                                        animate={{ rotate: 0, opacity: 1 }}
+                                        exit={{ rotate: 90, opacity: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        <X className="w-5 h-5" />
+                                    </motion.div>
+                                ) : (
+                                    <motion.div
+                                        key="menu"
+                                        initial={{ rotate: 90, opacity: 0 }}
+                                        animate={{ rotate: 0, opacity: 1 }}
+                                        exit={{ rotate: -90, opacity: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        <Menu className="w-5 h-5" />
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </Button>
                     </div>
                 </div>
             </nav>
 
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {mobileMenuOpen && (
+                    <>
+                        {/* Backdrop */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={closeMobileMenu}
+                            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
+                        />
+                        
+                        {/* Menu Panel */}
+                        <motion.div
+                            initial={{ x: locale === 'ar' ? '-100%' : '100%' }}
+                            animate={{ x: 0 }}
+                            exit={{ x: locale === 'ar' ? '-100%' : '100%' }}
+                            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+                            className={cn(
+                                "fixed top-0 bottom-0 z-50 w-72 bg-gold-950/95 backdrop-blur-xl border-gold-800/50 md:hidden",
+                                locale === 'ar' ? 'left-0 border-r' : 'right-0 border-l'
+                            )}
+                        >
+                            <div className="flex flex-col h-full">
+                                {/* Menu Header */}
+                                <div className="flex items-center justify-between p-4 border-b border-gold-800/50">
+                                    <span className="text-gold-300 font-semibold">{t('nav.menu')}</span>
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        onClick={closeMobileMenu}
+                                    >
+                                        <X className="w-5 h-5" />
+                                    </Button>
+                                </div>
+                                
+                                {/* Menu Links */}
+                                <div className="flex-1 p-4 space-y-2">
+                                    {navLinks.map((link, index) => (
+                                        <motion.div
+                                            key={link.href}
+                                            initial={{ opacity: 0, x: locale === 'ar' ? -20 : 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: index * 0.1 }}
+                                        >
+                                            <Link 
+                                                href={link.href}
+                                                onClick={closeMobileMenu}
+                                            >
+                                                <Button
+                                                    variant="ghost"
+                                                    className="w-full justify-start gap-3 h-12 text-gold-200 hover:text-gold-100 hover:bg-gold-800/30"
+                                                >
+                                                    <link.icon className="w-5 h-5 text-gold-400" />
+                                                    {link.label}
+                                                </Button>
+                                            </Link>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                                
+                                {/* Language Toggle */}
+                                <div className="p-4 border-t border-gold-800/50">
+                                    <Button 
+                                        onClick={() => {
+                                            toggleLanguage();
+                                            closeMobileMenu();
+                                        }}
+                                        variant="outline"
+                                        className="w-full gap-2"
+                                    >
+                                        <Globe className="w-5 h-5" />
+                                        {t('nav.language')}
+                                    </Button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
+
             {/* Main Content */}
-            <main className="relative z-10">
+            <main className="relative z-10 pt-16 md:pt-20">
                 {children}
             </main>
 
             {/* Footer */}
-            <footer className="relative z-10 bg-gold-900/90 border-t border-gold-700/50 py-6 mt-12">
-                <div className="max-w-7xl mx-auto px-4 text-center">
-                    <p className="text-gold-400">
-                        © {new Date().getFullYear()} {t('footer.goldcom')}. {t('footer.rights')}.
-                    </p>
+            <footer className="relative z-10 border-t border-gold-800/50 py-8 mt-16">
+                <div className="max-w-7xl mx-auto px-4">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                            <img 
+                                src="/images/goldcom-logo1.jpg" 
+                                alt="Goldcom" 
+                                className="h-8 w-auto rounded-lg opacity-70"
+                            />
+                            <span className="text-gold-500 text-sm">
+                                © {new Date().getFullYear()} {t('footer.goldcom')}
+                            </span>
+                        </div>
+                        <p className="text-gold-600 text-sm">
+                            {t('footer.rights')}
+                        </p>
+                    </div>
                 </div>
             </footer>
         </div>
     );
 }
-

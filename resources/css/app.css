@@ -6,24 +6,52 @@
 @source '../**/*.jsx';
 
 @theme {
-    --font-sans: 'Cairo', 'Poppins', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Outfit', 'Cairo', ui-sans-serif, system-ui, sans-serif;
     
-    /* Goldcom Brand Colors */
-    --color-gold-50: #FDF8F0;
-    --color-gold-100: #F9EED9;
-    --color-gold-200: #D8BC75;
-    --color-gold-300: #DBA661;
-    --color-gold-400: #DA9755;
-    --color-gold-500: #C8844B;
-    --color-gold-600: #AA6537;
-    --color-gold-700: #82502E;
-    --color-gold-800: #633F27;
-    --color-gold-900: #493220;
+    /* Goldcom Brand Colors - Refined Palette */
+    --color-gold-50: #FFFBF5;
+    --color-gold-100: #FEF3E2;
+    --color-gold-200: #F5D992;
+    --color-gold-300: #E8C55B;
+    --color-gold-400: #D4A44B;
+    --color-gold-500: #C6963F;
+    --color-gold-600: #A87B32;
+    --color-gold-700: #7A5A28;
+    --color-gold-800: #4D3A1F;
+    --color-gold-900: #2D2316;
+    --color-gold-950: #1A1410;
     
     /* Primary accent colors */
-    --color-primary: #DA9755;
-    --color-primary-dark: #C8844B;
-    --color-primary-light: #DBA661;
+    --color-primary: #C6963F;
+    --color-primary-dark: #A87B32;
+    --color-primary-light: #D4A44B;
+    
+    /* Background colors */
+    --color-background: #0D0B09;
+    --color-foreground: #F5D992;
+    
+    /* Muted colors */
+    --color-muted: #2D2316;
+    --color-muted-foreground: #A87B32;
+    
+    /* Border */
+    --color-border: #4D3A1F;
+    
+    /* Ring */
+    --color-ring: #C6963F;
+    
+    /* Radius */
+    --radius: 0.75rem;
+}
+
+/* Global resets */
+* {
+    border-color: var(--color-border);
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
 }
 
 /* RTL Support */
@@ -32,25 +60,25 @@
 }
 
 [dir="ltr"] {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Outfit', sans-serif;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--color-gold-100);
+    background: var(--color-gold-950);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--color-gold-500);
-    border-radius: 4px;
+    background: var(--color-gold-600);
+    border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-gold-600);
+    background: var(--color-gold-500);
 }
 
 /* Gold shimmer animation */
@@ -79,36 +107,15 @@
     background-clip: text;
 }
 
-/* Falling gold bars animation */
-@keyframes fall {
-    0% {
-        transform: translateY(-100vh) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-.gold-bar-fall {
-    animation: fall var(--duration, 10s) linear infinite;
-    animation-delay: var(--delay, 0s);
-}
-
 /* Pulse glow effect */
 @keyframes pulse-glow {
     0%, 100% {
-        box-shadow: 0 0 20px rgba(218, 151, 85, 0.3);
+        box-shadow: 0 0 20px rgba(198, 150, 63, 0.2),
+                    0 0 40px rgba(198, 150, 63, 0.1);
     }
     50% {
-        box-shadow: 0 0 40px rgba(218, 151, 85, 0.6);
+        box-shadow: 0 0 30px rgba(198, 150, 63, 0.4),
+                    0 0 60px rgba(198, 150, 63, 0.2);
     }
 }
 
@@ -128,4 +135,173 @@
 
 .float-animation {
     animation: float 3s ease-in-out infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+    background: linear-gradient(135deg, var(--color-gold-200), var(--color-gold-400), var(--color-gold-300));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Glass morphism */
+.glass {
+    background: rgba(45, 35, 22, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(198, 150, 63, 0.15);
+}
+
+/* Subtle grain texture overlay */
+.grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Animations for shadcn */
+@keyframes accordion-down {
+    from {
+        height: 0;
+    }
+    to {
+        height: var(--radix-accordion-content-height);
+    }
+}
+
+@keyframes accordion-up {
+    from {
+        height: var(--radix-accordion-content-height);
+    }
+    to {
+        height: 0;
+    }
+}
+
+/* Slide in animations */
+@keyframes slide-in-from-top {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-from-bottom {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Fade animations */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Zoom animations */
+@keyframes zoom-in {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes zoom-out {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+/* Animation classes */
+.animate-accordion-down {
+    animation: accordion-down 0.2s ease-out;
+}
+
+.animate-accordion-up {
+    animation: accordion-up 0.2s ease-out;
+}
+
+.animate-in {
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+.animate-out {
+    animation-duration: 0.15s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: both;
+}
+
+.fade-in-0 {
+    animation-name: fade-in;
+}
+
+.fade-out-0 {
+    animation-name: fade-out;
+}
+
+.zoom-in-95 {
+    animation-name: zoom-in;
+}
+
+.zoom-out-95 {
+    animation-name: zoom-out;
+}
+
+.slide-in-from-top-2 {
+    animation-name: slide-in-from-top;
+}
+
+.slide-in-from-bottom-2 {
+    animation-name: slide-in-from-bottom;
+}
+
+/* Loading spinner */
+.spinner {
+    border: 2px solid var(--color-gold-800);
+    border-top: 2px solid var(--color-gold-400);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

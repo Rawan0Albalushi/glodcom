@@ -7,7 +7,8 @@
     "nav": {
         "home": "الرئيسية",
         "simulator": "محاكي الأرباح",
-        "language": "English"
+        "language": "English",
+        "menu": "القائمة"
     },
     "counter": {
         "title": "مسجّل حتى الآن",
@@ -57,6 +58,7 @@
             "monthlyAmount": "المبلغ الشهري (ر.ع)",
             "monthlyAmountPlaceholder": "أدخل المبلغ",
             "months": "عدد الأشهر",
+            "monthsUnit": "شهر",
             "calculate": "احسب العائد",
             "calculating": "جاري الحساب..."
         },
@@ -70,7 +72,8 @@
             "profit": "الربح المتوقع",
             "profitPercentage": "نسبة الربح",
             "motivational": "🌟 استثمر في الذهب اليوم واحصد أرباحك غداً!",
-            "disclaimer": "* الأرقام تقريبية وتعتمد على أسعار السوق الفعلية"
+            "disclaimer": "* الأرقام تقريبية وتعتمد على أسعار السوق الفعلية",
+            "currency": "ر.ع"
         }
     },
     "governorates": {

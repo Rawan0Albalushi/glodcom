@@ -2,8 +2,15 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
+import { User, Phone, Mail, MapPin, Building, Coins, Tag, Loader2, Trophy, Sparkles, UserPlus } from 'lucide-react';
 import MainLayout from '../Layouts/MainLayout';
 import LiveCounter from '../Components/LiveCounter';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 
 const GOVERNORATES = [
     { id: 'muscat', wilayas: ['muscat', 'muttrah', 'bawshar', 'seeb', 'amerat', 'qurayyat'] },
@@ -67,10 +74,14 @@ export default function InterestRegistration() {
         setErrors(prev => ({ ...prev, monthly_amount: '' }));
     };
 
-    const handleGovernorateChange = (e) => {
-        const value = e.target.value;
+    const handleGovernorateChange = (value) => {
         setFormData(prev => ({ ...prev, governorate: value, wilaya: '' }));
         setErrors(prev => ({ ...prev, governorate: '', wilaya: '' }));
+    };
+
+    const handleWilayaChange = (value) => {
+        setFormData(prev => ({ ...prev, wilaya: value }));
+        setErrors(prev => ({ ...prev, wilaya: '' }));
     };
 
     const validateForm = () => {
@@ -140,13 +151,22 @@ export default function InterestRegistration() {
                         transition={{ duration: 0.6 }}
                         className="text-center mb-10"
                     >
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gold-200 mb-4">
-                            {t('interest.title')}
+                        <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ type: 'spring', delay: 0.2 }}
+                            className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-700 shadow-lg shadow-gold-500/30 mb-6"
+                        >
+                            <UserPlus className="w-10 h-10 text-white" />
+                        </motion.div>
+
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                            <span className="gradient-text">{t('interest.title')}</span>
                         </h1>
-                        <p className="text-xl text-gold-400 mb-2">
+                        <p className="text-xl text-gold-300 mb-2">
                             {t('interest.subtitle')}
                         </p>
-                        <p className="text-gold-500">
+                        <p className="text-gold-500 max-w-md mx-auto">
                             {t('interest.description')}
                         </p>
                     </motion.div>
@@ -169,234 +189,273 @@ export default function InterestRegistration() {
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
-                                className="bg-gradient-to-br from-gold-800/50 to-gold-900/50 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-gold-600/30 text-center"
                             >
-                                <motion.div
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    transition={{ type: 'spring', delay: 0.2 }}
-                                    className="text-8xl mb-6"
-                                >
-                                    🏆
-                                </motion.div>
-                                <h2 className="text-3xl font-bold text-gold-200 mb-4">
-                                    {t('interest.success.title')}
-                                </h2>
-                                <p className="text-gold-400 text-lg mb-8">
-                                    {t('interest.success.message')}
-                                </p>
-                                <button
-                                    onClick={resetForm}
-                                    className="px-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-white font-semibold rounded-xl transition-all transform hover:scale-105 shadow-lg"
-                                >
-                                    {t('interest.success.button')}
-                                </button>
+                                <Card className="text-center">
+                                    <CardContent className="pt-12 pb-10">
+                                        <motion.div
+                                            initial={{ scale: 0 }}
+                                            animate={{ scale: 1 }}
+                                            transition={{ type: 'spring', delay: 0.2 }}
+                                            className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-gold-500 to-gold-700 shadow-lg shadow-gold-500/30 mb-6"
+                                        >
+                                            <Trophy className="w-12 h-12 text-white" />
+                                        </motion.div>
+                                        
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: 0.3 }}
+                                        >
+                                            <h2 className="text-3xl font-bold text-gold-200 mb-4 flex items-center justify-center gap-2">
+                                                <Sparkles className="w-6 h-6 text-gold-400" />
+                                                {t('interest.success.title')}
+                                            </h2>
+                                            <p className="text-gold-400 text-lg mb-8 max-w-md mx-auto">
+                                                {t('interest.success.message')}
+                                            </p>
+                                            <Button
+                                                onClick={resetForm}
+                                                size="lg"
+                                                className="px-8"
+                                            >
+                                                {t('interest.success.button')}
+                                            </Button>
+                                        </motion.div>
+                                    </CardContent>
+                                </Card>
                             </motion.div>
                         ) : (
-                            <motion.form
+                            <motion.div
                                 key="form"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -20 }}
-                                onSubmit={handleSubmit}
-                                className="bg-gradient-to-br from-gold-800/50 to-gold-900/50 backdrop-blur-md rounded-3xl p-6 md:p-10 border border-gold-600/30 shadow-2xl"
                             >
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    {/* Name */}
-                                    <div>
-                                        <label className="block text-gold-300 mb-2 font-medium">
-                                            {t('interest.form.name')} *
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="name"
-                                            value={formData.name}
-                                            onChange={handleInputChange}
-                                            placeholder={t('interest.form.namePlaceholder')}
-                                            className={`w-full px-4 py-3 bg-gold-900/50 border ${errors.name ? 'border-red-500' : 'border-gold-600/30'} rounded-xl text-gold-100 placeholder-gold-600 focus:outline-none focus:border-gold-400 transition-colors`}
-                                        />
-                                        {errors.name && (
-                                            <p className="text-red-400 text-sm mt-1">{errors.name}</p>
-                                        )}
-                                    </div>
+                                <Card className="p-2 md:p-4">
+                                    <CardContent className="pt-6">
+                                        <form onSubmit={handleSubmit} className="space-y-6">
+                                            <div className="grid md:grid-cols-2 gap-6">
+                                                {/* Name */}
+                                                <div className="space-y-3">
+                                                    <Label htmlFor="name">
+                                                        {t('interest.form.name')} <span className="text-red-400">*</span>
+                                                    </Label>
+                                                    <div className="relative">
+                                                        <User className="absolute start-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gold-500" />
+                                                        <Input
+                                                            id="name"
+                                                            name="name"
+                                                            value={formData.name}
+                                                            onChange={handleInputChange}
+                                                            placeholder={t('interest.form.namePlaceholder')}
+                                                            className={cn("ps-11", errors.name && "border-red-500")}
+                                                        />
+                                                    </div>
+                                                    {errors.name && (
+                                                        <p className="text-red-400 text-sm">{errors.name}</p>
+                                                    )}
+                                                </div>
 
-                                    {/* Phone */}
-                                    <div>
-                                        <label className="block text-gold-300 mb-2 font-medium">
-                                            {t('interest.form.phone')} *
-                                        </label>
-                                        <input
-                                            type="tel"
-                                            name="phone"
-                                            value={formData.phone}
-                                            onChange={handleInputChange}
-                                            placeholder={t('interest.form.phonePlaceholder')}
-                                            className={`w-full px-4 py-3 bg-gold-900/50 border ${errors.phone ? 'border-red-500' : 'border-gold-600/30'} rounded-xl text-gold-100 placeholder-gold-600 focus:outline-none focus:border-gold-400 transition-colors`}
-                                            dir="ltr"
-                                        />
-                                        {errors.phone && (
-                                            <p className="text-red-400 text-sm mt-1">{errors.phone}</p>
-                                        )}
-                                    </div>
+                                                {/* Phone */}
+                                                <div className="space-y-3">
+                                                    <Label htmlFor="phone">
+                                                        {t('interest.form.phone')} <span className="text-red-400">*</span>
+                                                    </Label>
+                                                    <div className="relative">
+                                                        <Phone className="absolute start-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gold-500" />
+                                                        <Input
+                                                            id="phone"
+                                                            name="phone"
+                                                            type="tel"
+                                                            value={formData.phone}
+                                                            onChange={handleInputChange}
+                                                            placeholder={t('interest.form.phonePlaceholder')}
+                                                            className={cn("ps-11", errors.phone && "border-red-500")}
+                                                            dir="ltr"
+                                                        />
+                                                    </div>
+                                                    {errors.phone && (
+                                                        <p className="text-red-400 text-sm">{errors.phone}</p>
+                                                    )}
+                                                </div>
 
-                                    {/* Email */}
-                                    <div className="md:col-span-2">
-                                        <label className="block text-gold-300 mb-2 font-medium">
-                                            {t('interest.form.email')} *
-                                        </label>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            value={formData.email}
-                                            onChange={handleInputChange}
-                                            placeholder={t('interest.form.emailPlaceholder')}
-                                            className={`w-full px-4 py-3 bg-gold-900/50 border ${errors.email ? 'border-red-500' : 'border-gold-600/30'} rounded-xl text-gold-100 placeholder-gold-600 focus:outline-none focus:border-gold-400 transition-colors`}
-                                            dir="ltr"
-                                        />
-                                        {errors.email && (
-                                            <p className="text-red-400 text-sm mt-1">{errors.email}</p>
-                                        )}
-                                    </div>
+                                                {/* Email */}
+                                                <div className="md:col-span-2 space-y-3">
+                                                    <Label htmlFor="email">
+                                                        {t('interest.form.email')} <span className="text-red-400">*</span>
+                                                    </Label>
+                                                    <div className="relative">
+                                                        <Mail className="absolute start-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gold-500" />
+                                                        <Input
+                                                            id="email"
+                                                            name="email"
+                                                            type="email"
+                                                            value={formData.email}
+                                                            onChange={handleInputChange}
+                                                            placeholder={t('interest.form.emailPlaceholder')}
+                                                            className={cn("ps-11", errors.email && "border-red-500")}
+                                                            dir="ltr"
+                                                        />
+                                                    </div>
+                                                    {errors.email && (
+                                                        <p className="text-red-400 text-sm">{errors.email}</p>
+                                                    )}
+                                                </div>
 
-                                    {/* Governorate */}
-                                    <div>
-                                        <label className="block text-gold-300 mb-2 font-medium">
-                                            {t('interest.form.governorate')} *
-                                        </label>
-                                        <select
-                                            name="governorate"
-                                            value={formData.governorate}
-                                            onChange={handleGovernorateChange}
-                                            className={`w-full px-4 py-3 bg-gold-900/50 border ${errors.governorate ? 'border-red-500' : 'border-gold-600/30'} rounded-xl text-gold-100 focus:outline-none focus:border-gold-400 transition-colors appearance-none cursor-pointer`}
-                                        >
-                                            <option value="" className="bg-gold-900">{t('interest.form.governoratePlaceholder')}</option>
-                                            {GOVERNORATES.map(gov => (
-                                                <option key={gov.id} value={gov.id} className="bg-gold-900">
-                                                    {t(`governorates.${gov.id}`)}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        {errors.governorate && (
-                                            <p className="text-red-400 text-sm mt-1">{errors.governorate}</p>
-                                        )}
-                                    </div>
+                                                {/* Governorate */}
+                                                <div className="space-y-3">
+                                                    <Label>
+                                                        {t('interest.form.governorate')} <span className="text-red-400">*</span>
+                                                    </Label>
+                                                    <Select value={formData.governorate} onValueChange={handleGovernorateChange}>
+                                                        <SelectTrigger className={cn(errors.governorate && "border-red-500")}>
+                                                            <div className="flex items-center gap-2">
+                                                                <MapPin className="w-4 h-4 text-gold-500" />
+                                                                <SelectValue placeholder={t('interest.form.governoratePlaceholder')} />
+                                                            </div>
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            {GOVERNORATES.map(gov => (
+                                                                <SelectItem key={gov.id} value={gov.id}>
+                                                                    {t(`governorates.${gov.id}`)}
+                                                                </SelectItem>
+                                                            ))}
+                                                        </SelectContent>
+                                                    </Select>
+                                                    {errors.governorate && (
+                                                        <p className="text-red-400 text-sm">{errors.governorate}</p>
+                                                    )}
+                                                </div>
 
-                                    {/* Wilaya */}
-                                    <div>
-                                        <label className="block text-gold-300 mb-2 font-medium">
-                                            {t('interest.form.wilaya')} *
-                                        </label>
-                                        <select
-                                            name="wilaya"
-                                            value={formData.wilaya}
-                                            onChange={handleInputChange}
-                                            disabled={!selectedGovernorate}
-                                            className={`w-full px-4 py-3 bg-gold-900/50 border ${errors.wilaya ? 'border-red-500' : 'border-gold-600/30'} rounded-xl text-gold-100 focus:outline-none focus:border-gold-400 transition-colors appearance-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed`}
-                                        >
-                                            <option value="" className="bg-gold-900">{t('interest.form.wilayaPlaceholder')}</option>
-                                            {selectedGovernorate?.wilayas.map(wilaya => (
-                                                <option key={wilaya} value={wilaya} className="bg-gold-900">
-                                                    {t(`wilayas.${wilaya}`)}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        {errors.wilaya && (
-                                            <p className="text-red-400 text-sm mt-1">{errors.wilaya}</p>
-                                        )}
-                                    </div>
+                                                {/* Wilaya */}
+                                                <div className="space-y-3">
+                                                    <Label>
+                                                        {t('interest.form.wilaya')} <span className="text-red-400">*</span>
+                                                    </Label>
+                                                    <Select 
+                                                        value={formData.wilaya} 
+                                                        onValueChange={handleWilayaChange}
+                                                        disabled={!selectedGovernorate}
+                                                    >
+                                                        <SelectTrigger className={cn(errors.wilaya && "border-red-500")}>
+                                                            <div className="flex items-center gap-2">
+                                                                <Building className="w-4 h-4 text-gold-500" />
+                                                                <SelectValue placeholder={t('interest.form.wilayaPlaceholder')} />
+                                                            </div>
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            {selectedGovernorate?.wilayas.map(wilaya => (
+                                                                <SelectItem key={wilaya} value={wilaya}>
+                                                                    {t(`wilayas.${wilaya}`)}
+                                                                </SelectItem>
+                                                            ))}
+                                                        </SelectContent>
+                                                    </Select>
+                                                    {errors.wilaya && (
+                                                        <p className="text-red-400 text-sm">{errors.wilaya}</p>
+                                                    )}
+                                                </div>
 
-                                    {/* Monthly Amount */}
-                                    <div className="md:col-span-2">
-                                        <label className="block text-gold-300 mb-3 font-medium">
-                                            {t('interest.form.monthlyAmount')} *
-                                        </label>
-                                        <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
-                                            {MONTHLY_AMOUNTS.map(amount => (
-                                                <button
-                                                    key={amount}
-                                                    type="button"
-                                                    onClick={() => handleAmountSelect(amount)}
-                                                    className={`py-3 px-4 rounded-xl font-semibold transition-all ${
-                                                        selectedAmountType === amount
-                                                            ? 'bg-gradient-to-r from-gold-500 to-gold-600 text-white shadow-lg scale-105'
-                                                            : 'bg-gold-900/50 text-gold-300 border border-gold-600/30 hover:border-gold-500'
-                                                    }`}
-                                                >
-                                                    {t(`interest.amounts.${amount}`)}
-                                                </button>
-                                            ))}
-                                            <button
-                                                type="button"
-                                                onClick={() => handleAmountSelect('custom')}
-                                                className={`py-3 px-4 rounded-xl font-semibold transition-all col-span-2 md:col-span-1 ${
-                                                    selectedAmountType === 'custom'
-                                                        ? 'bg-gradient-to-r from-gold-500 to-gold-600 text-white shadow-lg scale-105'
-                                                        : 'bg-gold-900/50 text-gold-300 border border-gold-600/30 hover:border-gold-500'
-                                                }`}
+                                                {/* Monthly Amount */}
+                                                <div className="md:col-span-2 space-y-3">
+                                                    <Label>
+                                                        {t('interest.form.monthlyAmount')} <span className="text-red-400">*</span>
+                                                    </Label>
+                                                    <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
+                                                        {MONTHLY_AMOUNTS.map(amount => (
+                                                            <Button
+                                                                key={amount}
+                                                                type="button"
+                                                                onClick={() => handleAmountSelect(amount)}
+                                                                variant={selectedAmountType === amount ? "default" : "secondary"}
+                                                                className={cn(
+                                                                    "h-12",
+                                                                    selectedAmountType === amount && "scale-105 shadow-lg"
+                                                                )}
+                                                            >
+                                                                <Coins className="w-4 h-4 me-1" />
+                                                                {t(`interest.amounts.${amount}`)}
+                                                            </Button>
+                                                        ))}
+                                                        <Button
+                                                            type="button"
+                                                            onClick={() => handleAmountSelect('custom')}
+                                                            variant={selectedAmountType === 'custom' ? "default" : "secondary"}
+                                                            className={cn(
+                                                                "col-span-2 md:col-span-1 h-12",
+                                                                selectedAmountType === 'custom' && "scale-105 shadow-lg"
+                                                            )}
+                                                        >
+                                                            {t('interest.amounts.custom')}
+                                                        </Button>
+                                                    </div>
+                                                    
+                                                    <AnimatePresence>
+                                                        {selectedAmountType === 'custom' && (
+                                                            <motion.div
+                                                                initial={{ opacity: 0, height: 0 }}
+                                                                animate={{ opacity: 1, height: 'auto' }}
+                                                                exit={{ opacity: 0, height: 0 }}
+                                                            >
+                                                                <Input
+                                                                    type="number"
+                                                                    value={customAmount}
+                                                                    onChange={handleCustomAmountChange}
+                                                                    placeholder={t('interest.form.monthlyAmountPlaceholder')}
+                                                                    min="1"
+                                                                />
+                                                            </motion.div>
+                                                        )}
+                                                    </AnimatePresence>
+                                                    
+                                                    {errors.monthly_amount && (
+                                                        <p className="text-red-400 text-sm">{errors.monthly_amount}</p>
+                                                    )}
+                                                </div>
+
+                                                {/* Referral Code */}
+                                                <div className="md:col-span-2 space-y-3">
+                                                    <Label htmlFor="referral_code">
+                                                        {t('interest.form.referralCode')}
+                                                    </Label>
+                                                    <div className="relative">
+                                                        <Tag className="absolute start-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gold-500" />
+                                                        <Input
+                                                            id="referral_code"
+                                                            name="referral_code"
+                                                            value={formData.referral_code}
+                                                            onChange={handleInputChange}
+                                                            placeholder={t('interest.form.referralCodePlaceholder')}
+                                                            className="ps-11"
+                                                            dir="ltr"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Submit Button */}
+                                            <Button
+                                                type="submit"
+                                                disabled={isSubmitting}
+                                                size="xl"
+                                                className="w-full pulse-glow"
                                             >
-                                                {t('interest.amounts.custom')}
-                                            </button>
-                                        </div>
-                                        
-                                        {selectedAmountType === 'custom' && (
-                                            <motion.div
-                                                initial={{ opacity: 0, height: 0 }}
-                                                animate={{ opacity: 1, height: 'auto' }}
-                                                className="mt-3"
-                                            >
-                                                <input
-                                                    type="number"
-                                                    value={customAmount}
-                                                    onChange={handleCustomAmountChange}
-                                                    placeholder={t('interest.form.monthlyAmountPlaceholder')}
-                                                    className="w-full px-4 py-3 bg-gold-900/50 border border-gold-600/30 rounded-xl text-gold-100 placeholder-gold-600 focus:outline-none focus:border-gold-400 transition-colors"
-                                                    min="1"
-                                                />
-                                            </motion.div>
-                                        )}
-                                        
-                                        {errors.monthly_amount && (
-                                            <p className="text-red-400 text-sm mt-2">{errors.monthly_amount}</p>
-                                        )}
-                                    </div>
-
-                                    {/* Referral Code */}
-                                    <div className="md:col-span-2">
-                                        <label className="block text-gold-300 mb-2 font-medium">
-                                            {t('interest.form.referralCode')}
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="referral_code"
-                                            value={formData.referral_code}
-                                            onChange={handleInputChange}
-                                            placeholder={t('interest.form.referralCodePlaceholder')}
-                                            className="w-full px-4 py-3 bg-gold-900/50 border border-gold-600/30 rounded-xl text-gold-100 placeholder-gold-600 focus:outline-none focus:border-gold-400 transition-colors"
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Submit Button */}
-                                <motion.button
-                                    type="submit"
-                                    disabled={isSubmitting}
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    className="w-full mt-8 py-4 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-white font-bold text-lg rounded-xl transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed pulse-glow"
-                                >
-                                    {isSubmitting ? (
-                                        <span className="flex items-center justify-center gap-2">
-                                            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                                            </svg>
-                                            {t('interest.form.submitting')}
-                                        </span>
-                                    ) : (
-                                        t('interest.form.submit')
-                                    )}
-                                </motion.button>
-                            </motion.form>
+                                                {isSubmitting ? (
+                                                    <span className="flex items-center gap-2">
+                                                        <Loader2 className="w-5 h-5 animate-spin" />
+                                                        {t('interest.form.submitting')}
+                                                    </span>
+                                                ) : (
+                                                    <span className="flex items-center gap-2">
+                                                        <UserPlus className="w-5 h-5" />
+                                                        {t('interest.form.submit')}
+                                                    </span>
+                                                )}
+                                            </Button>
+                                        </form>
+                                    </CardContent>
+                                </Card>
+                            </motion.div>
                         )}
                     </AnimatePresence>
                 </div>
@@ -404,4 +463,3 @@ export default function InterestRegistration() {
         </MainLayout>
     );
 }
-

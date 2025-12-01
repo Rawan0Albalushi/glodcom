@@ -7,7 +7,8 @@
     "nav": {
         "home": "Home",
         "simulator": "Profit Simulator",
-        "language": "العربية"
+        "language": "العربية",
+        "menu": "Menu"
     },
     "counter": {
         "title": "Registered so far",
@@ -57,6 +58,7 @@
             "monthlyAmount": "Monthly Amount (OMR)",
             "monthlyAmountPlaceholder": "Enter amount",
             "months": "Number of Months",
+            "monthsUnit": "months",
             "calculate": "Calculate Returns",
             "calculating": "Calculating..."
         },
@@ -70,7 +72,8 @@
             "profit": "Expected Profit",
             "profitPercentage": "Profit Percentage",
             "motivational": "🌟 Invest in gold today and reap your profits tomorrow!",
-            "disclaimer": "* Figures are approximate and depend on actual market prices"
+            "disclaimer": "* Figures are approximate and depend on actual market prices",
+            "currency": "OMR"
         }
     },
     "governorates": {
