@@ -18,6 +18,10 @@ Route::get('/simulator', function () {
     return Inertia::render('GoldSimulator');
 })->name('simulator');
 
+Route::get('/certificate', function () {
+    return Inertia::render('GoldCertificate');
+})->name('certificate');
+
 Route::get('/lang/{locale}', function (string $locale) {
     if (in_array($locale, ['ar', 'en'])) {
         session(['locale' => $locale]);

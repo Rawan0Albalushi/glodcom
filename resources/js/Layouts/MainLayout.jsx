@@ -2,7 +2,7 @@ import { Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Home, Calculator, Globe } from 'lucide-react';
+import { Menu, X, Home, Calculator, Globe, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import GoldBarsAnimation from '../Components/GoldBarsAnimation';
@@ -50,6 +50,7 @@ export default function MainLayout({ children }) {
     const navLinks = [
         { href: '/', label: t('nav.home'), icon: Home },
         { href: '/simulator', label: t('nav.simulator'), icon: Calculator },
+        { href: '/certificate', label: t('nav.certificate'), icon: Award },
     ];
 
     return (
@@ -79,9 +80,9 @@ export default function MainLayout({ children }) {
                         {/* Logo */}
                         <Link href="/" className="flex items-center gap-3 group">
                             <motion.img 
-                                src="/images/goldcom-logo1.jpg" 
+                                src="/images/Goldcom Logo - Wide Monochrome White.png" 
                                 alt="Goldcom" 
-                                className="h-10 md:h-12 w-auto rounded-xl shadow-lg ring-1 ring-gold-700/50 group-hover:ring-gold-500/70 transition-all duration-300"
+                                className="h-10 md:h-12 w-auto transition-all duration-300"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             />

@@ -7,6 +7,7 @@
     "nav": {
         "home": "الرئيسية",
         "simulator": "محاكي الأرباح",
+        "certificate": "شهادة الذهب",
         "language": "English",
         "menu": "القائمة"
     },
@@ -142,6 +143,34 @@
         "duqm": "الدقم",
         "mahout": "محوت",
         "jazir": "الجازر"
+    },
+    "certificate": {
+        "title": "شهادة الذهب",
+        "subtitle": "احصل على شهادتك الذهبية المميزة",
+        "description": "أنشئ شهادة ذهبية أنيقة وقم بتحميلها",
+        "form": {
+            "name": "الاسم الكامل",
+            "namePlaceholder": "أدخل اسمك الكامل",
+            "goldGrams": "كمية الذهب (جرام)",
+            "goldGramsPlaceholder": "أدخل كمية الذهب",
+            "certificateNumber": "رقم الشهادة",
+            "certificateNumberPlaceholder": "سيتم توليده تلقائياً",
+            "issueDate": "تاريخ الإصدار",
+            "autoGenerate": "اتركه فارغاً للتوليد التلقائي",
+            "generate": "إنشاء الشهادة"
+        },
+        "certTitle": "شهادة ملكية الذهب",
+        "certSubtitle": "Gold Ownership Certificate",
+        "certBody": "نشهد بأن",
+        "certGoldAmount": "يمتلك",
+        "grams": "جرام من الذهب",
+        "certDescription": "مسجل لدى منصة جولدكم للادخار بالذهب",
+        "certNumber": "رقم الشهادة",
+        "certDate": "تاريخ الإصدار",
+        "createNew": "إنشاء شهادة جديدة",
+        "download": "تحميل الشهادة",
+        "downloading": "جاري التحميل...",
+        "note": "* هذه الشهادة للعرض فقط وليست وثيقة رسمية"
     },
     "footer": {
         "rights": "جميع الحقوق محفوظة",

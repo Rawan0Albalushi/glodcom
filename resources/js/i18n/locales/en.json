@@ -7,6 +7,7 @@
     "nav": {
         "home": "Home",
         "simulator": "Profit Simulator",
+        "certificate": "Gold Certificate",
         "language": "العربية",
         "menu": "Menu"
     },
@@ -142,6 +143,34 @@
         "duqm": "Duqm",
         "mahout": "Mahout",
         "jazir": "Al Jazir"
+    },
+    "certificate": {
+        "title": "Gold Certificate",
+        "subtitle": "Get Your Exclusive Gold Certificate",
+        "description": "Create an elegant gold certificate and download it",
+        "form": {
+            "name": "Full Name",
+            "namePlaceholder": "Enter your full name",
+            "goldGrams": "Gold Amount (grams)",
+            "goldGramsPlaceholder": "Enter gold amount",
+            "certificateNumber": "Certificate Number",
+            "certificateNumberPlaceholder": "Will be auto-generated",
+            "issueDate": "Issue Date",
+            "autoGenerate": "Leave empty for auto-generation",
+            "generate": "Generate Certificate"
+        },
+        "certTitle": "Gold Ownership Certificate",
+        "certSubtitle": "شهادة ملكية الذهب",
+        "certBody": "This is to certify that",
+        "certGoldAmount": "owns",
+        "grams": "grams of gold",
+        "certDescription": "Registered with Goldcom Gold Savings Platform",
+        "certNumber": "Certificate No.",
+        "certDate": "Issue Date",
+        "createNew": "Create New Certificate",
+        "download": "Download Certificate",
+        "downloading": "Downloading...",
+        "note": "* This certificate is for display purposes only and is not an official document"
     },
     "footer": {
         "rights": "All rights reserved",
