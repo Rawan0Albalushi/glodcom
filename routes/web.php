@@ -22,6 +22,10 @@ Route::get('/certificate', function () {
     return Inertia::render('GoldCertificate');
 })->name('certificate');
 
+Route::get('/certificate/{id}', function (string $id) {
+    return Inertia::render('GoldCertificate', ['certificateId' => $id]);
+})->name('certificate.show');
+
 Route::get('/lang/{locale}', function (string $locale) {
     if (in_array($locale, ['ar', 'en'])) {
         session(['locale' => $locale]);
