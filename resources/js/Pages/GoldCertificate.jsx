@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { Award, Download, RefreshCw } from 'lucide-react';
+import { Award, Download } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import QRCode from 'qrcode';
 import MainLayout from '../Layouts/MainLayout';
@@ -153,7 +153,7 @@ export default function GoldCertificate() {
                     className="h-10 w-auto mx-auto mb-3"
                 />
                 <h2 className="gradient-text text-lg font-bold">
-                    {isRTL ? 'شهادة ملكية السبيكة الذهبية' : 'Gold Bar Certificate'}
+                    {isRTL ? 'شهادة ملكية سبيكة ذهب' : 'Gold Bar Certificate'}
                 </h2>
                 <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mt-2" />
             </div>
@@ -207,6 +207,12 @@ export default function GoldCertificate() {
                             {isRTL 
                                 ? 'هذه الشهادة صادرة من منصة جولدكم للادخار بالذهب'
                                 : 'Issued by Goldcom Gold Savings Platform'
+                            }
+                        </p>
+                        <p className="text-gold-500/70 text-[8px] mt-1">
+                            {isRTL 
+                                ? '* هذه شهادة افتراضية للعرض فقط'
+                                : '* This is a virtual certificate for display only'
                             }
                         </p>
                     </div>
@@ -283,7 +289,7 @@ export default function GoldCertificate() {
                                 fontFamily: isRTL ? '"Cairo", "Segoe UI", Tahoma, sans-serif' : 'inherit',
                                 direction: isRTL ? 'rtl' : 'ltr',
                             }}>
-                                {isRTL ? 'شهادة ملكية السبيكة الذهبية' : 'GOLD BAR OWNERSHIP CERTIFICATE'}
+                                {isRTL ? 'شهادة ملكية سبيكة ذهب' : 'GOLD BAR OWNERSHIP CERTIFICATE'}
                             </h1>
                             <div style={{ width: '120px', height: '2px', background: 'linear-gradient(90deg, transparent, #C6963F, transparent)', margin: '0 auto' }} />
                         </div>
@@ -342,6 +348,16 @@ export default function GoldCertificate() {
                                     direction: isRTL ? 'rtl' : 'ltr',
                                 }}>
                                     {isRTL ? 'هذه الشهادة صادرة من منصة جولدكم للادخار بالذهب' : 'This certificate is issued by Goldcom Gold Savings Platform'}
+                                </p>
+                                <p style={{ 
+                                    color: 'rgba(122, 90, 40, 0.7)', 
+                                    fontSize: '9px', 
+                                    margin: 0,
+                                    marginTop: '4px',
+                                    fontFamily: isRTL ? '"Cairo", "Segoe UI", Tahoma, sans-serif' : 'inherit',
+                                    direction: isRTL ? 'rtl' : 'ltr',
+                                }}>
+                                    {isRTL ? '* هذه شهادة افتراضية للعرض فقط' : '* This is a virtual certificate for display only'}
                                 </p>
                             </div>
                             <div style={{ textAlign: 'center' }}>
@@ -438,8 +454,8 @@ export default function GoldCertificate() {
                             </motion.div>
                         )}
 
-                                {/* Action Buttons */}
-                        <div className="flex flex-col sm:flex-row justify-center gap-3 px-2 sm:px-4">
+                                {/* Action Button */}
+                        <div className="flex justify-center px-2 sm:px-4">
                                     <Button
                                         onClick={downloadCertificate}
                                         disabled={isDownloading}
@@ -449,17 +465,6 @@ export default function GoldCertificate() {
                                 <span className="flex items-center justify-center gap-2">
                                             <Download className={`w-4 h-4 sm:w-5 sm:h-5 ${isDownloading ? 'animate-bounce' : ''}`} />
                                             {isDownloading ? t('certificate.downloading') : t('certificate.download')}
-                                        </span>
-                                    </Button>
-                                    <Button
-                                onClick={() => window.location.reload()}
-                                        variant="secondary"
-                                        size="xl"
-                                className="w-full sm:w-auto sm:min-w-[200px] text-sm sm:text-base"
-                                    >
-                                <span className="flex items-center justify-center gap-2">
-                                            <RefreshCw className="w-4 h-4 sm:w-5 sm:h-5" />
-                                            {t('certificate.createNew')}
                                         </span>
                                     </Button>
                                 </div>

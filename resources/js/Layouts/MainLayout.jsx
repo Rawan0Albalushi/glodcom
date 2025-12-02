@@ -245,13 +245,10 @@ export default function MainLayout({ children }) {
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
                             <img 
-                                src="/images/goldcom-logo1.jpg" 
+                                src="/images/Goldcom Logo - Wide Monochrome White.png" 
                                 alt="Goldcom" 
-                                className="h-8 w-auto rounded-lg opacity-70"
+                                className="h-8 w-auto opacity-80"
                             />
-                            <span className="text-gold-500 text-sm">
-                                © {new Date().getFullYear()} {t('footer.goldcom')}
-                            </span>
                         </div>
                         <p className="text-gold-600 text-sm">
                             {t('footer.rights')}

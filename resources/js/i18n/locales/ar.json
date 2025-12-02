@@ -146,14 +146,14 @@
     },
     "certificate": {
         "title": "شهادة الذهب",
-        "subtitle": "احصل على شهادتك الذهبية المميزة",
-        "description": "أدخل اسمك للحصول على شهادة ملكية سبيكة ذهبية",
+        "subtitle": "",
+        "description": "أدخل اسمك للحصول على شهادة ملكية سبيكة ذهب",
         "form": {
             "name": "الاسم الكامل",
             "namePlaceholder": "أدخل اسمك الكامل",
             "generate": "إنشاء الشهادة"
         },
-        "certTitle": "شهادة ملكية سبيكة ذهبية",
+        "certTitle": "شهادة ملكية سبيكة ذهب",
         "certSubtitle": "GOLD BAR OWNERSHIP CERTIFICATE",
         "holderName": "اسم المالك",
         "barDetails": "تفاصيل السبيكة",

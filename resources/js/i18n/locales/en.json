@@ -146,7 +146,7 @@
     },
     "certificate": {
         "title": "Gold Certificate",
-        "subtitle": "Get Your Exclusive Gold Certificate",
+        "subtitle": "",
         "description": "Enter your name to get a gold bar ownership certificate",
         "form": {
             "name": "Full Name",
@@ -154,7 +154,7 @@
             "generate": "Generate Certificate"
         },
         "certTitle": "Gold Bar Ownership Certificate",
-        "certSubtitle": "شهادة ملكية سبيكة ذهبية",
+        "certSubtitle": "شهادة ملكية سبيكة ذهب",
         "holderName": "Certificate Holder",
         "barDetails": "Gold Bar Details",
         "barWeight": "Bar Weight",
